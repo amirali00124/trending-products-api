@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Wireless Earbuds",
+    "price": 39.99,
+    "image": "https://example.com/earbuds.jpg",
+    "category": "Electronics",
+    "platform": "Amazon",
+    "trend_score": 92,
+    "affiliate_link": "https://amzn.to/example"
+  },
+  {
+    "name": "Handmade Leather Wallet",
+    "price": 49.99,
+    "image": "https://example.com/wallet.jpg",
+    "category": "Accessories",
+    "platform": "Etsy",
+    "trend_score": 88,
+    "affiliate_link": "https://etsy.com/example"
+  }
+]
