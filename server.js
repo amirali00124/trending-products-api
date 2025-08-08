@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const https = require("https"); // <-- added for keep-alive
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +38,18 @@ app.get("/trending", (req, res) => {
 app.get("/", (req, res) => {
   res.send({ message: "Trending Products API is running" });
 });
+
+// ✅ Self‑ping every 4 minutes to prevent Render sleep
+if (process.env.RENDER) { // only run in deployed environment
+  const SELF_URL = "https://trending-products-api.onrender.com";
+  setInterval(() => {
+    https.get(SELF_URL, res => {
+      console.log(`[KeepAlive] Pinged self at ${new Date().toISOString()} — status: ${res.statusCode}`);
+    }).on("error", err => {
+      console.error("[KeepAlive] Error pinging self:", err.message);
+    });
+  }, 4 * 60 * 1000);
+}
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
